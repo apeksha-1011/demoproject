@@ -1,0 +1,54 @@
+{% include 'base.html' %}
+{% block content %}
+
+{% load static %}
+{% if user.is_authenticated %}
+<h1>All products</h1>
+<h3><a href="{% url 'logout_user' %}">Logout</a></h3>
+{% else %}
+<h1><a href="{% url 'login_user' %}">Login</a></h1>
+{% endif %}
+<div class="container">
+    {% for product in products_object %}
+    <div class="card" style="width: 18rem;">
+        <!-- {% comment %} <img class="card-img-top" src="{{product.image.url}}" alt="Card image cap"> {% endcomment %}
+        {% comment %} <img class="card-img-top" src={{ 'media/banner.jpg' }}" alt="Card image cap">  {% endcomment %} -->
+        <img class="card-img-top" src="{% static 'images/banner.jpg' %}" alt="Card image cap"> 
+        <div class="card-body">
+          <h5 class="card-title">{{product.product_name}}</h5>
+          <input type="text" name="product_name" class="form-control" id="{{product.id}}" placeholder="Edit product name" onmouseover="changecolor('{{product.id}}');">
+          <p class="card-text">{{product.product_description|slice:":50"}}...</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{product.product_price}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="{% url 'delete_product' product.id %}" class="card-link">Delete</a>
+          <a class="card-link" onclick="update_detail('{{product.id}}');">Update</a>
+          <a href="{% url 'product_details' product.id %}" class="card-link">View Product</a>
+        </div>
+      </div>
+      {% endfor %} 
+</div>
+{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script>
+  function changecolor(id){
+    $(".card-title").css('color', 'red')
+  }
+  
+    function update_detail(id){
+        // alert(id)
+        var productname = document.getElementById(id).value
+        $.ajax({
+               type:"POST",
+               url: `{% url "update_product_detail" %}`,
+               data: {productname: productname, id:id},
+               success: function( data ) 
+               {
+                   window.location.reload()
+               }
+            })
+    }
+</script>

@@ -1,0 +1,10 @@
+{% include 'base.html' %}
+
+{% block content %}
+<h1>Product {{product_details.product_name}}</h1>
+<div class="container">
+    <h1>{{product_details.product_name}}</h1>
+    <p>{{product_details.product_description}}</p>
+    <p>Rs. {{product_details.product_price}}</p>
+</div>
+{% endblock %}

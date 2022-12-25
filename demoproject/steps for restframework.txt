@@ -1,0 +1,33 @@
+1. Download the dependencies for restframework
+https://www.django-rest-framework.org/#installation
+
+2. Follow the doc to add restframwork in registered apps
+
+3. Add restframework's parameters in settings.py
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+}
+
+4. Add serializers for our models (serializers.py)
+
+5. Add serializers class into our views.py file for CRUD operations
+
+--------------------------------------------------
+Authentication
+1. Install simple_jwt
+https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html
+
+2. Follow the document for simple_jwt
+    2.1 Add into registered app in settings.py
+    2.2 restframework Authentication parameters
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        ...
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+
+    2.3 Add into urls of project level (not app)
+    2.4 Add 'SIMPLE_JWT' configuration in settings.py
+    2.5 Create a function to generate tokens and use it anywhere in our app functions
+    permission_classes = [IsAuthenticated]

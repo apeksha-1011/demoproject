@@ -1,0 +1,16 @@
+To submit the data into Database from frontend FORM tag
+
+1. Fill in the FORM
+2. After clicking the submit button, send the data to backend(Python-Django)
+   That means the data filled from FORM should received in views.py.
+   2.1 Listen to the data send by frontend
+   2.2 send the received data to DB
+3. When Django received the data, make an entry in DB.
+
+---------------------------------------
+Update from new URL link
+1. Redirect to a new page from Update button
+   - display_products/<str:id>/
+2. Fetch the id from the URL
+3. Do the action same in in function "update_product_detail"
+4. Redirect to the Product detail page upon successful save.
